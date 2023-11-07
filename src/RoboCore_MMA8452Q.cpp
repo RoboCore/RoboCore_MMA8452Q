@@ -3,8 +3,8 @@
 * 
 * Library to use the MMA8452Q accelerometer.
 * 
-* Copyright 2020 RoboCore.
-* Written by Francois (17/07/20).
+* Copyright 2023 RoboCore.
+* Written by Francois (22/08/2023).
 * Based on the library by Jim Lindblom @ SparkFun Electronics
 * 
 * 
@@ -47,7 +47,12 @@ MMA8452Q::MMA8452Q(uint8_t address){
 //  @returns the result of the write operation (0 on success) [uint8_t]
 uint8_t MMA8452Q::active(void){
   uint8_t c = readRegister(MMA8452Q_Register::CTRL_REG1);
-  return writeRegister(MMA8452Q_Register::CTRL_REG1, (c | 0x01));
+  uint8_t res = writeRegister(MMA8452Q_Register::CTRL_REG1, (c | 0x01));
+
+  delay(3); // small delay to complete the transition to active (turn-on time worst case scenario)
+  // the call of <delay()> should be safe in ESP microcontrollers
+
+  return res;
 }
 
 // --------------------------------------------------
@@ -140,6 +145,9 @@ uint8_t MMA8452Q::init(MMA8452Q_Scale scale, MMA8452Q_ODR odr){
   }
   
   standby(); // must be in standby to change registers
+
+  delay(3); // small delay to complete the transition to standby (value based on turn-on time worst case scenario)
+  // the call of <delay()> should be safe in ESP microcontrollers
   
   setScale(scale); // set up accelerometer scale
   setODR(odr); // set up output data rate
@@ -308,6 +316,7 @@ uint8_t MMA8452Q::setScale(MMA8452Q_Scale fsr){
 
 // Set the Standby mode
 //  @returns the result of the write operation (0 on success) [uint8_t]
+//  Note: it is recommended to use a delay (~3 ms) afterward and before writing to a register.
 uint8_t MMA8452Q::standby(void){
   uint8_t c = readRegister(MMA8452Q_Register::CTRL_REG1);
   return writeRegister(MMA8452Q_Register::CTRL_REG1, (c & 0xFE));

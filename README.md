@@ -2,7 +2,9 @@ RoboCore MMA8452Q Arduino Library
 =====================================
 
 Arduino library for the MMA8452Q 3-axis accelerometer.
-Based on the library by Jim Lindblom @ SparkFun Electronics
+Based on the library by Jim Lindblom @ SparkFun Electronics.
+
+Copyright 2023 RoboCore.
 
 Repository Contents
 -------------------
@@ -16,7 +18,8 @@ Repository Contents
 Version History
 ---------------
 
-* [v1.0.0](https://github.com/RoboCore/RoboCore_MMA8452Q) - First release.
+* [v1.0.1](https://github.com/RoboCore/RoboCore_MMA8452Q) - Small bug correction.
+* [v1.0.0](https://github.com/RoboCore/RoboCore_MMA8452Q/releases/tag/v1.0.0) - First release.
 
 License Information
 -------------------

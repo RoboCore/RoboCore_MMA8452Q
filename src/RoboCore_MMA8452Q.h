@@ -6,8 +6,8 @@
 * 
 * Library to use the MMA8452Q accelerometer.
 * 
-* Copyright 2020 RoboCore.
-* Written by Francois (17/07/20).
+* Copyright 2023 RoboCore.
+* Written by Francois (22/08/2023).
 * Based on the library by Jim Lindblom @ SparkFun Electronics
 * 
 * 
